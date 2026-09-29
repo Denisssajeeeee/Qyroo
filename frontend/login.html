@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+
+  <meta charset="UTF-8">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+  <title> Qyroo - Login</title>
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+
+  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+  >
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Poppins:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
+</head>
+<body class="auth-page">
+
+  <!-- Background -->
+
+  <div class="background-glow"></div>
+
+
+  <!-- LOGIN CONTAINER -->
+
+  <div class="auth-container">
+    <div class="auth-card">
+
+
+      <!-- LOGO -->
+
+<div class="auth-logo">
+  <img
+    src="img/avatar.png"
+    alt="Denn Hosting"
+  >
+</div>
+
+
+      <!-- TITLE -->
+
+      <h1>
+        Halo 👋
+      </h1>
+      <p class="auth-subtitle">
+        Silahkan Login Terlebih Dahulu
+      </p>
+
+
+      <!-- LOGIN FORM -->
+
+      <form id="loginForm">
+
+
+        <!-- EMAIL -->
+
+        <div class="form-group">
+
+          <label for="email">
+            Email
+          </label>
+          <input
+            type="email"
+            id="email"
+            placeholder="Masukkan email"
+            autocomplete="email"
+            required
+          >
+
+        </div>
+
+
+        <!-- PASSWORD -->
+
+        <div class="form-group">
+          <label for="password">
+            Password
+          </label>
+          <input
+            type="password"
+            id="password"
+            placeholder="Masukkan password"
+            autocomplete="current-password"
+            required
+          >
+        </div>
+
+
+        <!-- FORGOT PASSWORD -->
+
+        <div class="forgot-wrapper">
+          <a
+            href="#"
+            onclick="forgotPassword(); return false;"
+          >
+            Lupa password?
+          </a>
+        </div>
+
+
+        <!-- LOGIN BUTTON -->
+
+        <button
+          type="submit"
+          class="auth-button"
+        >
+          Login
+        </button>
+      </form>
+
+
+      <!-- ERROR -->
+
+      <p
+        id="loginMessage"
+        class="auth-message"
+      ></p>
+
+
+      <!-- REGISTER -->
+
+      <div class="register-text">
+
+        Belum punya akun?
+
+        <a href="register.html">
+          Register
+        </a>
+
+      </div>
+
+
+    </div>
+
+  </div>
+
+
+  <!-- FIREBASE -->
+
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+
+
+  <!-- APP JS -->
+
+  <script src="js/app.js"></script>
+
+
+  <script>
+
+    const loginForm =
+      document.getElementById("loginForm");
+
+    const loginMessage =
+      document.getElementById("loginMessage");
+
+
+    loginForm.addEventListener("submit", async function(event) {
+
+      event.preventDefault();
+
+
+      const email =
+        document.getElementById("email").value.trim();
+
+      const password =
+        document.getElementById("password").value;
+
+
+      loginMessage.innerText = "";
+      loginMessage.className = "auth-message";
+
+
+      try {
+
+        const userCredential = await firebase.auth().signInWithEmailAndPassword(
+          email,
+          password
+        );
+
+        const signedInUser = userCredential.user;
+        addRegisteredUser(signedInUser.email);
+
+        loginMessage.innerText =
+          "Login berhasil...";
+
+        loginMessage.classList.add("success");
+
+
+        setTimeout(() => {
+
+          if (isAdminEmail(signedInUser.email)) {
+            window.location.href = "admin.html";
+            return;
+          }
+
+          window.location.href = "home.html";
+
+        }, 500);
+
+
+      } catch (error) {
+
+        loginMessage.innerText =
+          "Email atau password salah.";
+
+        loginMessage.classList.add("error");
+
+      }
+
+    });
+
+
+    function forgotPassword() {
+
+      const email =
+        document.getElementById("email").value.trim();
+
+
+      if (!email) {
+
+        loginMessage.innerText =
+          "Masukkan email terlebih dahulu.";
+
+        loginMessage.className =
+          "auth-message error";
+
+        return;
+
+      }
+
+
+      firebase.auth()
+        .sendPasswordResetEmail(email)
+        .then(() => {
+
+          loginMessage.innerText =
+            "Link reset password telah dikirim ke email.";
+
+          loginMessage.className =
+            "auth-message success";
+
+        })
+        .catch(() => {
+
+          loginMessage.innerText =
+            "Gagal mengirim reset password.";
+
+          loginMessage.className =
+            "auth-message error";
+
+        });
+
+    }
+
+  </script>
+
+  <script src="js/chatbot.js"></script>
+</body>
+</html>

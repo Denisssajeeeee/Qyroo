@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+  <title> Qyroo - Home</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link
+    rel="preconnect"
+    href="https://fonts.googleapis.com"
+  >
+  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+  >
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Poppins:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
+</head>
+<body>
+  <div class="background-glow"></div>
+
+  <!-- ================= MENU BUTTON ================= -->
+
+  <button
+    id="menuButton"
+    class="menu-button"
+    type="button"
+  >
+    ☰
+  </button>
+
+  <button
+    id="themeToggle"
+    class="theme-toggle"
+    type="button"
+    aria-label="Ganti tema"
+  >
+    <span id="themeIcon">☀</span>
+  </button>
+
+  <div id="globalToast" class="toast" role="status" aria-live="polite"></div>
+
+
+  <!-- ================= OVERLAY ================= -->
+
+  <div
+    id="menuOverlay"
+    class="menu-overlay"
+  ></div>
+
+
+  <!-- ================= SIDE MENU ================= -->
+
+  <aside
+    id="sideMenu"
+    class="side-menu"
+  >
+    <div class="side-menu-header">
+
+      <span>Qyroo Hosting</span>
+      <button
+        id="closeMenu"
+        class="close-menu"
+        type="button"
+      >
+        ×
+      </button>
+
+    </div>
+    <a href="home.html">
+      <span>⌂</span>
+      Home
+    </a>
+    <a href="profile.html">
+      <span>●</span>
+      Profile
+    </a>
+    <a href="produk.html">
+      <span>◆</span>
+      Produk
+    </a>
+    <a href="tools.html">
+      <span>⚒</span>
+      Tools
+    </a>
+
+    <a href="topup.html">
+      <span>💳</span>
+      Top Up
+    </a>
+    <a href="docs.html">
+      <span>▣</span>
+      Docs
+    </a>
+  </aside>
+
+
+  <!-- ================= MAIN ================= -->
+
+  <div class="container">
+    <div class="page-header">
+      <div class="page-header-icon">
+        ⌂
+      </div>
+      <h1>
+        HOME PAGE
+      </h1>
+      <p id="welcomeText">
+        Welcome back
+      </p>
+    </div>
+
+    <div class="quick-search">
+      <span class="search-icon">⌕</span>
+      <input
+        id="menuSearch"
+        type="text"
+        placeholder="Cari menu atau fitur..."
+        aria-label="Cari menu"
+      >
+    </div>
+
+
+    <!-- WELCOME -->
+
+    <div class="card">
+      <div class="card-title">
+        <span class="title-icon">
+          ✦
+        </span>
+        Welcome
+      </div>
+      <p class="about-text">
+        Selamat datang di Qyroo Hosting
+        <br><br>
+        Gunakan menu untuk mengakses
+        Profile, Produk, Tools, dan Docs.
+        <br><br>
+        Note:  <br> Ini Masih Dalam Tahap Pengembangan Jadi masih Rawan Error,Ini Akan Dikembangkan menjadi sebuah aplikasi untul mempermudah pengguna
+      </p>
+    </div>
+
+    <div class="card">
+      <div class="card-title">
+        <span class="title-icon">
+          ⏱
+        </span>
+        Quick Panel
+      </div>
+      <div class="dashboard-grid">
+        <div class="mini-stat">
+          <span>Tanggal</span>
+          <strong id="todayDate">Memuat...</strong>
+        </div>
+        <div class="mini-stat">
+          <span>Jam</span>
+          <strong id="currentTime">--:--</strong>
+        </div>
+      </div>
+      <div class="dashboard-actions">
+        <button type="button" class="mini-action" onclick="copyUserEmail()">
+          Salin Email
+        </button>
+        <a href="docs.html" class="mini-action secondary">
+          Buka Docs
+        </a>
+      </div>
+      <div class="dashboard-actions" id="adminQuickAction" style="display:none; margin-top: 12px;">
+        <a href="admin.html" class="mini-action admin-action">
+          Panel Admin
+        </a>
+      </div>
+    </div>
+
+    <div class="card" id="homeAnnouncementCard">
+      <div class="card-title">
+        <span class="title-icon">⚑</span>
+        Pengumuman Admin
+      </div>
+      <p class="about-text" id="homeAnnouncementText">
+        Selamat datang di panel admin Qyroo.
+      </p>
+    </div>
+
+    <div class="card">
+      <div class="card-title">
+        <span class="title-icon">
+          ✎
+        </span>
+        Quick Notes
+      </div>
+      <textarea id="quickNote" class="quick-note-input" rows="4" placeholder="Tulis catatan cepat untuk hari ini..."></textarea>
+      <div class="dashboard-actions">
+        <button type="button" class="mini-action" id="saveNoteBtn">
+          Simpan Catatan
+        </button>
+        <button type="button" class="mini-action secondary" id="clearNoteBtn">
+          Hapus
+        </button>
+      </div>
+      <p class="note-status" id="noteStatus">Catatan tersimpan di perangkat ini.</p>
+    </div>
+
+
+    <!-- ACCOUNT -->
+
+    <div class="card">
+
+      <div class="card-title">
+
+        <span class="title-icon">
+          ●
+        </span>
+
+        Account
+
+      </div>
+
+
+      <div class="info-item">
+
+        <div class="icon">
+          ✉
+        </div>
+
+        <div>
+
+          <span>
+            Login sebagai
+          </span>
+
+          <p id="userEmail">
+            Loading...
+          </p>
+
+        </div>
+
+      </div>
+
+      <button type="button" class="mini-action account-copy" onclick="copyUserEmail()">
+        Salin Email
+      </button>
+
+    </div>
+
+
+    <!-- QUICK MENU -->
+
+    <div class="info-card">
+
+
+      <a
+        href="profile.html"
+        class="info-item quick-link"
+      >
+
+        <div class="icon">
+          ●
+        </div>
+
+        <div>
+
+          <span>
+            Profile
+          </span>
+
+          <p>
+            Lihat Profile
+          </p>
+
+        </div>
+
+      </a>
+
+
+      <a
+        href="produk.html"
+        class="info-item quick-link"
+      >
+
+        <div class="icon">
+          ◆
+        </div>
+
+        <div>
+
+          <span>
+            Produk
+          </span>
+
+          <p>
+            Lihat Produk
+          </p>
+
+        </div>
+
+      </a>
+
+
+
+
+      <a
+        href="topup.html"
+        class="info-item quick-link"
+      >
+
+        <div class="icon">
+          💳
+        </div>
+
+        <div>
+          <span>
+            Top Up Saldo
+          </span>
+
+          <p>
+            Tambah saldo akun
+          </p>
+        </div>
+
+      </a>
+
+      <a
+        href="tools.html"
+        class="info-item quick-link"
+      >
+
+        <div class="icon">
+          ⚒
+        </div>
+
+        <div>
+
+          <span>
+            Tools
+          </span>
+
+          <p>
+            Developer Tools
+          </p>
+
+        </div>
+
+      </a>
+
+
+      <div class="info-item">
+
+        <div class="icon">
+          ✓
+        </div>
+
+        <div>
+
+          <span>
+            Status
+          </span>
+
+          <p class="active">
+            Online
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- LOGOUT -->
+
+    <div class="actions">
+
+      <button
+        class="logout-btn"
+        onclick="logout()"
+      >
+
+        <span>
+          ↪
+        </span>
+
+        Logout
+
+      </button>
+
+    </div>
+
+
+    <!-- ================= BOTTOM NAV ================= -->
+
+    <div class="bottom-nav">
+
+      <a
+        href="profile.html"
+        class="nav-item"
+      >
+
+        <span>●</span>
+
+        <small>
+          PROFILE
+        </small>
+
+      </a>
+
+
+      <a
+        href="produk.html"
+        class="nav-item"
+      >
+
+        <span>◆</span>
+
+        <small>
+          PRODUK
+        </small>
+
+      </a>
+
+
+      <a
+        href="home.html"
+        class="nav-item active"
+      >
+
+        <span>⌂</span>
+
+        <small>
+          HOME
+        </small>
+
+      </a>
+
+
+      <a
+        href="docs.html"
+        class="nav-item"
+      >
+
+        <span>▣</span>
+
+        <small>
+          DOCS
+        </small>
+
+      </a>
+
+    </div>
+
+  </div>
+
+
+  <!-- ================= FIREBASE ================= -->
+
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+
+  <script src="js/app.js"></script>
+
+
+  <!-- ================= MENU SCRIPT ================= -->
+
+  <script>
+
+    const menuButton =
+      document.getElementById("menuButton");
+
+    const closeMenu =
+      document.getElementById("closeMenu");
+
+    const sideMenu =
+      document.getElementById("sideMenu");
+
+    const menuOverlay =
+      document.getElementById("menuOverlay");
+
+
+    function openMenu() {
+
+      sideMenu.classList.add("menu-open");
+
+      menuOverlay.classList.add("overlay-show");
+
+    }
+
+
+    function closeSideMenu() {
+
+      sideMenu.classList.remove("menu-open");
+
+      menuOverlay.classList.remove("overlay-show");
+
+    }
+
+
+    menuButton.addEventListener(
+      "click",
+      openMenu
+    );
+
+
+    closeMenu.addEventListener(
+      "click",
+      closeSideMenu
+    );
+
+
+    menuOverlay.addEventListener(
+      "click",
+      closeSideMenu
+    );
+
+
+    document.addEventListener(
+      "keydown",
+      function(event) {
+
+        if (event.key === "Escape") {
+
+          closeSideMenu();
+
+        }
+
+      }
+    );
+
+
+    /*
+      Tutup menu setelah memilih halaman
+    */
+
+    document.querySelectorAll(
+      ".side-menu a"
+    ).forEach(link => {
+
+      link.addEventListener(
+        "click",
+        closeSideMenu
+      );
+
+    });
+
+    const searchInput = document.getElementById("menuSearch");
+    const searchableItems = [
+      ...document.querySelectorAll(".side-menu a"),
+      ...document.querySelectorAll(".quick-link")
+    ];
+
+    if (searchInput) {
+      searchInput.addEventListener("input", function () {
+        const query = this.value.trim().toLowerCase();
+
+        searchableItems.forEach(item => {
+          const text = item.textContent.toLowerCase();
+          const shouldShow = !query || text.includes(query);
+          item.style.display = shouldShow ? "" : "none";
+        });
+      });
+    }
+
+  </script>
+
+
+  <!-- ================= FIREBASE AUTH ================= -->
+
+  <script>
+
+    firebase.auth().onAuthStateChanged(
+      function(user) {
+
+        if (user) {
+
+          document.getElementById(
+            "userEmail"
+          ).innerText = user.email;
+
+
+          const profile = getProfileData();
+          document.getElementById(
+            "welcomeText"
+          ).innerText =
+            "Welcome back, " + (profile.displayName || user.email);
+
+        } else {
+
+          window.location.href =
+            "login.html";
+
+        }
+
+      }
+    );
+
+  </script>
+
+  <script src="js/chatbot.js"></script>
+</body>
+</html>

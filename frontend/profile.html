@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+  <title> Qyroo - Profile</title>
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Poppins:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
+</head>
+
+<body>
+
+  <div class="background-glow"></div>
+
+  <div class="container">
+
+    <!-- PROFILE -->
+
+    <div class="profile-header">
+
+      <div class="cover">
+
+        <div class="cover-overlay"></div>
+
+        <div class="brand">
+          © Qyroo 2026
+        </div>
+
+      </div>
+
+
+      <div class="profile-content">
+
+        <div class="avatar">
+          <img
+            src="img/avatar.png"
+            alt="Profile Picture"
+          >
+        </div>
+
+
+        <h1 id="username">Qyroo User</h1>
+
+        <p
+          class="username"
+          id="profileEmail"
+        >
+          Loading...
+        </p>
+
+
+        <p class="description" id="profileBio">
+          Pengguna Qyroo Gratis 
+        </p>
+
+        <p class="profile-role-badge" id="profileRole">Free</p>
+
+        <button
+          type="button"
+          class="profile-edit-btn"
+          id="openProfileEditor"
+        >
+          Edit Profile
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- INFORMATION -->
+
+    <div class="info-card">
+
+      <!-- EMAIL -->
+
+      <div class="info-item">
+
+        <div class="icon">
+          ✉
+        </div>
+
+        <div>
+
+          <span>
+            Email
+          </span>
+
+          <p id="userEmail">
+            Loading...
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <!-- STATUS -->
+
+      <div class="info-item">
+
+        <div class="icon">
+          ✓
+        </div>
+
+        <div>
+
+          <span>
+            Status
+          </span>
+
+          <p class="active">
+            Active
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <!-- ROLE -->
+
+      <div class="info-item role-purchase-trigger" id="rolePurchaseTrigger" tabindex="0" role="button" aria-label="Beli role">
+
+        <div class="icon">
+          ★
+        </div>
+
+        <div>
+
+          <span>
+            Role
+          </span>
+
+          <p id="userRole">
+            Free
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <!-- LOGIN METHOD -->
+
+      <div class="info-item">
+
+        <div class="icon">
+          🔐
+        </div>
+
+        <div>
+
+          <span>
+            Login Method
+          </span>
+
+          <p>
+            Email
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- ABOUT -->
+
+    <div class="card">
+
+      <div class="card-title">
+
+        <span class="title-icon">
+          ✦
+        </span>
+
+        Information For User
+
+      </div>
+
+
+      <p class="about-text">
+        Website Ini Masih Dalam Pengembangan Jadi Kalo Mau Komplain Error hub admin  Tele : @DennNotDeveloper     </p>
+    </div>
+
+
+
+    <!-- LOGOUT -->
+
+    <div class="actions">
+
+      <button
+        class="logout-btn"
+        onclick="logout()"
+      >
+
+        <span>
+          ↪
+        </span>
+
+        Logout
+
+      </button>
+
+    </div>
+
+
+    <!-- NAVIGATION -->
+
+    <div class="bottom-nav">
+
+      <a
+        href="profile.html"
+        class="nav-item active"
+      >
+        <span>●</span>
+        <small>PROFILE</small>
+      </a>
+
+
+      <a
+        href="produk.html"
+        class="nav-item"
+      >
+        <span>◆</span>
+        <small>PRODUK</small>
+      </a>
+
+
+      <a
+        href="home.html"
+        class="nav-item"
+      >
+        <span>⌂</span>
+        <small>HOME</small>
+      </a>
+
+
+      <a
+        href="docs.html"
+        class="nav-item"
+      >
+        <span>▣</span>
+        <small>DOCS</small>
+      </a>
+
+    </div>
+
+  </div>
+
+  <div class="profile-modal-overlay" id="profileModalOverlay" hidden>
+    <div class="profile-modal" role="dialog" aria-modal="true" aria-labelledby="profileEditorTitle">
+      <div class="profile-modal-header">
+        <h2 id="profileEditorTitle">Edit Profil</h2>
+        <button type="button" class="close-profile-modal" id="closeProfileModal" aria-label="Tutup editor">×</button>
+      </div>
+
+      <form id="profileForm">
+        <div class="form-group">
+          <label for="displayName">Nama</label>
+          <input id="displayName" type="text" maxlength="40" placeholder="Masukkan nama Anda" required>
+        </div>
+
+        <div class="form-group">
+          <label for="bioText">Bio</label>
+          <textarea id="bioText" rows="3" maxlength="120" placeholder="Masukkan bio singkat"></textarea>
+        </div>
+
+        <div class="profile-modal-actions">
+          <button type="button" class="secondary-btn" id="cancelProfileEdit">Batal</button>
+          <button type="submit" class="auth-button">Simpan</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="profile-modal-overlay" id="rolePurchaseOverlay" hidden>
+    <div class="profile-modal role-purchase-modal" role="dialog" aria-modal="true" aria-labelledby="rolePurchaseTitle">
+      <div class="profile-modal-header">
+        <h2 id="rolePurchaseTitle">Pilih Role</h2>
+        <button type="button" class="close-profile-modal" id="closeRolePurchaseModal" aria-label="Tutup pilihan role">×</button>
+      </div>
+
+      <div class="role-option-list">
+        <button type="button" class="role-option-card" data-role-option="Free">
+          <span class="role-option-name">Free</span>
+          <span class="role-option-price">Gratis</span>
+        </button>
+        <button type="button" class="role-option-card" data-role-option="Premium">
+          <span class="role-option-name">Premium</span>
+          <span class="role-option-price">Rp 39.000</span>
+        </button>
+        <button type="button" class="role-option-card" data-role-option="VIP">
+          <span class="role-option-name">VIP</span>
+          <span class="role-option-price">Rp 79.000</span>
+        </button>
+        <button type="button" class="role-option-card" data-role-option="Pro">
+          <span class="role-option-name">Pro</span>
+          <span class="role-option-price">Rp 149.000</span>
+        </button>
+      </div>
+
+      <div class="role-option-summary" id="selectedRoleSummary">
+        <strong id="selectedRoleName">Premium</strong>
+        <span id="selectedRolePrice">Rp 39.000</span>
+        <p id="selectedRoleBenefit">Akses fitur lanjutan, promo member, dan support lebih cepat.</p>
+      </div>
+
+      <div class="profile-modal-actions">
+        <button type="button" class="secondary-btn" id="cancelRolePurchase">Batal</button>
+        <button type="button" class="auth-button" id="confirmRolePurchase">Beli Role</button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- FIREBASE -->
+
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+
+  <script src="js/app.js"></script>
+
+
+  <!-- AUTH CHECK -->
+
+  <script>
+
+    const profileModalOverlay = document.getElementById("profileModalOverlay");
+    const profileForm = document.getElementById("profileForm");
+    const openProfileEditor = document.getElementById("openProfileEditor");
+    const closeProfileModal = document.getElementById("closeProfileModal");
+    const cancelProfileEdit = document.getElementById("cancelProfileEdit");
+    const rolePurchaseOverlay = document.getElementById("rolePurchaseOverlay");
+    const rolePurchaseTrigger = document.getElementById("rolePurchaseTrigger");
+    const closeRolePurchaseModal = document.getElementById("closeRolePurchaseModal");
+    const cancelRolePurchase = document.getElementById("cancelRolePurchase");
+    const confirmRolePurchase = document.getElementById("confirmRolePurchase");
+    let selectedRoleForPurchase = "Premium";
+
+    function syncSelectedRoleSummary() {
+      const roleInfo = getRoleDefinition(selectedRoleForPurchase);
+      const selectedRoleName = document.getElementById("selectedRoleName");
+      const selectedRolePrice = document.getElementById("selectedRolePrice");
+      const selectedRoleBenefit = document.getElementById("selectedRoleBenefit");
+
+      if (selectedRoleName) selectedRoleName.textContent = roleInfo.title;
+      if (selectedRolePrice) selectedRolePrice.textContent = roleInfo.price;
+      if (selectedRoleBenefit) selectedRoleBenefit.textContent = roleInfo.benefit;
+
+      document.querySelectorAll(".role-option-card").forEach((button) => {
+        const isSelected = button.dataset.roleOption === selectedRoleForPurchase;
+        button.classList.toggle("selected", isSelected);
+      });
+    }
+
+    function openRolePurchaseModal() {
+      const currentRole = getUserRole(firebase.auth().currentUser?.email || "");
+      selectedRoleForPurchase = ["Free", "Premium", "VIP", "Pro"].includes(currentRole) ? currentRole : "Premium";
+      syncSelectedRoleSummary();
+      if (rolePurchaseOverlay) {
+        rolePurchaseOverlay.removeAttribute("hidden");
+        rolePurchaseOverlay.style.display = "flex";
+      }
+    }
+
+    function closeRolePurchaseModalHandler() {
+      if (rolePurchaseOverlay) {
+        rolePurchaseOverlay.setAttribute("hidden", "true");
+        rolePurchaseOverlay.style.display = "none";
+      }
+    }
+
+    if (!profileModalOverlay || !profileForm || !openProfileEditor || !closeProfileModal || !cancelProfileEdit) {
+      console.warn("Popup profil belum siap atau elemen tidak ditemukan.");
+    } else {
+      function populateProfileForm() {
+        const profile = getProfileData();
+        document.getElementById("displayName").value = profile.displayName;
+        document.getElementById("bioText").value = profile.bio;
+      }
+
+      function openProfileModal() {
+        populateProfileForm();
+        profileModalOverlay.removeAttribute("hidden");
+        profileModalOverlay.style.display = "flex";
+      }
+
+      function closeProfileModalHandler() {
+        profileModalOverlay.setAttribute("hidden", "true");
+        profileModalOverlay.style.display = "none";
+      }
+
+      openProfileEditor.addEventListener("click", function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+        openProfileModal();
+      });
+
+      closeProfileModal.addEventListener("click", function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+        closeProfileModalHandler();
+      });
+
+      cancelProfileEdit.addEventListener("click", function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+        closeProfileModalHandler();
+      });
+
+      profileModalOverlay.addEventListener("click", function (event) {
+        if (event.target === profileModalOverlay) {
+          closeProfileModalHandler();
+        }
+      });
+
+      profileForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        const displayName = document.getElementById("displayName").value.trim();
+        const bioText = document.getElementById("bioText").value.trim();
+
+        const profile = saveProfileData({
+          displayName: displayName || "Qyroo User",
+          bio: bioText || "Pengguna Qyroo Gratis"
+        });
+
+        document.getElementById("username").textContent = profile.displayName;
+        document.getElementById("profileBio").textContent = profile.bio;
+        const welcomeText = document.getElementById("welcomeText");
+        if (welcomeText) {
+          welcomeText.textContent = "Welcome back, " + profile.displayName;
+        }
+
+        closeProfileModalHandler();
+        showToast("Profil berhasil diperbarui");
+      });
+    }
+
+    if (rolePurchaseTrigger) {
+      const openRolePurchase = function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+        openRolePurchaseModal();
+      };
+      rolePurchaseTrigger.addEventListener("click", openRolePurchase);
+      rolePurchaseTrigger.addEventListener("keydown", function (event) {
+        if (event.key === "Enter" || event.key === " ") {
+          openRolePurchase(event);
+        }
+      });
+    }
+
+    document.querySelectorAll(".role-option-card").forEach((button) => {
+      button.addEventListener("click", function () {
+        selectedRoleForPurchase = button.dataset.roleOption || "Premium";
+        syncSelectedRoleSummary();
+      });
+    });
+
+    if (closeRolePurchaseModal) {
+      closeRolePurchaseModal.addEventListener("click", function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+        closeRolePurchaseModalHandler();
+      });
+    }
+
+    if (cancelRolePurchase) {
+      cancelRolePurchase.addEventListener("click", function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+        closeRolePurchaseModalHandler();
+      });
+    }
+
+    if (rolePurchaseOverlay) {
+      rolePurchaseOverlay.addEventListener("click", function (event) {
+        if (event.target === rolePurchaseOverlay) {
+          closeRolePurchaseModalHandler();
+        }
+      });
+    }
+
+    if (confirmRolePurchase) {
+      confirmRolePurchase.addEventListener("click", function () {
+        const user = firebase.auth().currentUser;
+        if (!user || !user.email) {
+          showToast("Silakan login terlebih dahulu", "error");
+          return;
+        }
+
+        const nextRole = setUserRole(user.email, selectedRoleForPurchase);
+        const profile = saveProfileData({ role: nextRole });
+        applyUserProfile();
+        document.getElementById("profileRole").textContent = nextRole;
+        document.getElementById("userRole").textContent = nextRole;
+        closeRolePurchaseModalHandler();
+        showToast(`Role berhasil diubah menjadi ${nextRole}`);
+        if (typeof profile !== "undefined") {
+          document.getElementById("profileRole").textContent = profile.role || nextRole;
+        }
+      });
+    }
+
+    firebase.auth().onAuthStateChanged(user => {
+
+      if (user) {
+
+        document.getElementById("userEmail").innerText =
+          user.email;
+
+        document.getElementById("profileEmail").innerText =
+          user.email;
+
+        applyUserProfile();
+
+      } else {
+
+        window.location.href = "login.html";
+
+      }
+
+    });
+
+  </script>
+
+  <script src="js/chatbot.js"></script>
+</body>
+</html>

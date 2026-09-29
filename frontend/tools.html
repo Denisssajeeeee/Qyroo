@@ -1,0 +1,1711 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Denn Hosting - Tools</title>
+
+
+  <!-- GOOGLE FONT -->
+
+  <link
+    rel="preconnect"
+    href="https://fonts.googleapis.com"
+  >
+
+  <link
+    rel="preconnect"
+    href="https://fonts.googleapis.com"
+    crossorigin
+  >
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Poppins:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
+
+
+  <!-- MAIN CSS -->
+
+  <link
+    rel="stylesheet"
+    href="css/style.css"
+  >
+
+
+  <style>
+
+    /* =========================================
+       TOOLS PAGE
+    ========================================= */
+
+    .tools-main {
+      padding-top: 25px;
+      padding-bottom: 120px;
+    }
+
+
+    /* =========================================
+       MENU BUTTON
+    ========================================= */
+
+    .menu-button {
+      position: fixed;
+
+      top: 20px;
+      left: 20px;
+
+      width: 45px;
+      height: 45px;
+
+      border: 1px solid rgba(132, 91, 255, 0.25);
+
+      border-radius: 14px;
+
+      background:
+        rgba(15, 13, 26, 0.88);
+
+      color: #eeeaff;
+
+      font-size: 21px;
+
+      cursor: pointer;
+
+      z-index: 1001;
+
+      backdrop-filter: blur(15px);
+
+      transition: 0.25s;
+    }
+
+
+    .menu-button:hover {
+      background:
+        rgba(112, 71, 216, 0.18);
+
+      border-color:
+        rgba(132, 91, 255, 0.5);
+
+      transform:
+        translateY(-2px);
+    }
+
+
+    /* =========================================
+       OVERLAY
+    ========================================= */
+
+    .menu-overlay {
+      position: fixed;
+
+      inset: 0;
+
+      background:
+        rgba(0, 0, 0, 0.65);
+
+      opacity: 0;
+
+      visibility: hidden;
+
+      transition: 0.3s;
+
+      z-index: 1000;
+    }
+
+
+    .menu-overlay.overlay-show {
+      opacity: 1;
+
+      visibility: visible;
+    }
+
+
+    /* =========================================
+       SIDE MENU
+    ========================================= */
+
+    .side-menu {
+      position: fixed;
+
+      top: 0;
+      left: 0;
+
+      width: 280px;
+      max-width: 85%;
+
+      height: 100vh;
+
+      padding: 25px 18px;
+
+      background:
+        linear-gradient(
+          180deg,
+          #100d1d,
+          #08070d
+        );
+
+      border-right:
+        1px solid rgba(132, 91, 255, 0.2);
+
+      transform:
+        translateX(-100%);
+
+      transition:
+        transform 0.3s ease;
+
+      z-index: 1002;
+
+      box-shadow:
+        15px 0 50px rgba(0, 0, 0, 0.4);
+    }
+
+
+    .side-menu.menu-open {
+      transform:
+        translateX(0);
+    }
+
+
+    /* =========================================
+       SIDE MENU HEADER
+    ========================================= */
+
+    .side-menu-header {
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+      margin-bottom: 30px;
+
+      padding:
+        5px 5px 18px;
+
+      border-bottom:
+        1px solid rgba(132, 91, 255, 0.15);
+
+      color: #eeeaff;
+
+      font-family:
+        "Cinzel", serif;
+
+      font-size: 18px;
+    }
+
+
+    .close-menu {
+      width: 35px;
+      height: 35px;
+
+      border: none;
+
+      border-radius: 10px;
+
+      background:
+        rgba(255,255,255,0.04);
+
+      color: #aaa3b5;
+
+      font-size: 25px;
+
+      cursor: pointer;
+
+      transition: 0.2s;
+    }
+
+
+    .close-menu:hover {
+      background:
+        rgba(255,255,255,0.08);
+
+      color: #fff;
+    }
+
+
+    /* =========================================
+       SIDE MENU LINKS
+    ========================================= */
+
+    .side-menu a {
+      display: flex;
+
+      align-items: center;
+
+      gap: 13px;
+
+      width: 100%;
+
+      padding: 14px;
+
+      margin-bottom: 8px;
+
+      border-radius: 13px;
+
+      color: #9b96a5;
+
+      text-decoration: none;
+
+      font-size: 13px;
+
+      transition: 0.2s;
+    }
+
+
+    .side-menu a span {
+      width: 25px;
+
+      text-align: center;
+
+      color: #8e68ed;
+
+      font-size: 17px;
+    }
+
+
+    .side-menu a:hover {
+      color: #eeeaff;
+
+      background:
+        rgba(112, 71, 216, 0.12);
+
+      transform:
+        translateX(3px);
+    }
+
+
+    /* =========================================
+       PAGE HEADER
+    ========================================= */
+
+    .tools-header {
+      text-align: center;
+
+      margin:
+        25px auto 30px;
+
+      max-width: 600px;
+    }
+
+
+    .tools-header-icon {
+      width: 58px;
+      height: 58px;
+
+      margin:
+        0 auto 15px;
+
+      display: flex;
+
+      align-items: center;
+      justify-content: center;
+
+      border-radius: 18px;
+
+      background:
+        linear-gradient(
+          135deg,
+          rgba(138, 98, 255, 0.18),
+          rgba(80, 45, 160, 0.08)
+        );
+
+      border:
+        1px solid rgba(138, 98, 255, 0.25);
+
+      color: #a789ff;
+
+      font-size: 25px;
+
+      box-shadow:
+        0 10px 35px rgba(0,0,0,0.25);
+    }
+
+
+    .tools-header h1 {
+      margin: 0;
+
+      color: #eeeaff;
+
+      font-family:
+        "Cinzel", serif;
+
+      font-size: 27px;
+
+      font-weight: 600;
+
+      letter-spacing: 0.3px;
+    }
+
+
+    .tools-header p {
+      margin:
+        9px 0 0;
+
+      color: #777180;
+
+      font-size: 12px;
+
+      line-height: 1.7;
+    }
+
+
+    /* =========================================
+       TOOLS GRID
+    ========================================= */
+
+    .tools-grid {
+
+      display: grid;
+
+      grid-template-columns:
+        repeat(
+          2,
+          minmax(0, 1fr)
+        );
+
+      gap: 18px;
+
+      max-width: 900px;
+
+      margin:
+        0 auto;
+    }
+
+
+    /* =========================================
+       TOOL CARD
+    ========================================= */
+
+    .tool-card {
+
+      position: relative;
+
+      padding: 22px;
+
+      border-radius: 20px;
+
+      background:
+        linear-gradient(
+          145deg,
+          rgba(255,255,255,0.045),
+          rgba(255,255,255,0.018)
+        );
+
+      border:
+        1px solid rgba(132, 91, 255, 0.14);
+
+      box-shadow:
+        0 15px 45px rgba(0,0,0,0.18);
+
+      overflow: hidden;
+
+      transition:
+        transform 0.25s,
+        border-color 0.25s,
+        box-shadow 0.25s;
+    }
+
+
+    .tool-card::before {
+
+      content: "";
+
+      position: absolute;
+
+      width: 150px;
+      height: 150px;
+
+      top: -90px;
+      right: -70px;
+
+      border-radius: 50%;
+
+      background:
+        rgba(132, 91, 255, 0.08);
+
+      filter:
+        blur(10px);
+
+      pointer-events: none;
+    }
+
+
+    .tool-card:hover {
+
+      transform:
+        translateY(-3px);
+
+      border-color:
+        rgba(132, 91, 255, 0.28);
+
+      box-shadow:
+        0 20px 50px rgba(0,0,0,0.25);
+    }
+
+
+    /* =========================================
+       TOOL HEADER
+    ========================================= */
+
+    .tool-header {
+
+      display: flex;
+
+      align-items: flex-start;
+
+      gap: 14px;
+
+      margin-bottom: 18px;
+    }
+
+
+    .tool-icon {
+
+      flex-shrink: 0;
+
+      width: 43px;
+      height: 43px;
+
+      display: flex;
+
+      align-items: center;
+      justify-content: center;
+
+      border-radius: 13px;
+
+      background:
+        rgba(132, 91, 255, 0.10);
+
+      border:
+        1px solid rgba(132, 91, 255, 0.18);
+
+      color: #a789ff;
+
+      font-size: 19px;
+    }
+
+
+    .tool-heading {
+
+      min-width: 0;
+
+      flex: 1;
+    }
+
+
+    .tool-title {
+
+      margin: 0;
+
+      color: #eeeaff;
+
+      font-family:
+        "Cinzel", serif;
+
+      font-size: 15px;
+
+      font-weight: 600;
+    }
+
+
+    .tool-description {
+
+      margin:
+        5px 0 0;
+
+      color: #777180;
+
+      font-size: 11px;
+
+      line-height: 1.65;
+    }
+
+
+    /* =========================================
+       FORM
+    ========================================= */
+
+    .form-group {
+
+      margin-bottom: 13px;
+    }
+
+
+    .form-group label {
+
+      display: block;
+
+      margin-bottom: 7px;
+
+      color: #aaa3b5;
+
+      font-size: 11px;
+
+      font-weight: 500;
+    }
+
+
+    .tool-card input {
+
+      width: 100%;
+
+      box-sizing: border-box;
+
+      padding:
+        13px 14px;
+
+      border-radius: 12px;
+
+      border:
+        1px solid rgba(132, 91, 255, 0.13);
+
+      outline: none;
+
+      background:
+        rgba(0,0,0,0.18);
+
+      color: #eeeaff;
+
+      font-family:
+        "Poppins", sans-serif;
+
+      font-size: 12px;
+
+      transition: 0.2s;
+    }
+
+
+    .tool-card input::placeholder {
+
+      color: #5f5a67;
+    }
+
+
+    .tool-card input:focus {
+
+      border-color:
+        rgba(138, 98, 255, 0.55);
+
+      background:
+        rgba(0,0,0,0.25);
+
+      box-shadow:
+        0 0 0 3px
+        rgba(138, 98, 255, 0.07);
+    }
+
+
+    /* =========================================
+       BUTTON
+    ========================================= */
+
+    .tool-button {
+
+      width: 100%;
+
+      min-height: 44px;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      box-sizing: border-box;
+
+      margin-top: 12px;
+
+      padding:
+        11px 15px;
+
+      border:
+        1px solid rgba(132, 91, 255, 0.28);
+
+      border-radius: 12px;
+
+      background:
+        linear-gradient(
+          135deg,
+          rgba(112, 71, 216, 0.25),
+          rgba(82, 49, 160, 0.18)
+        );
+
+      color: #eeeaff;
+
+      font-family:
+        "Poppins", sans-serif;
+
+      font-size: 12px;
+
+      font-weight: 600;
+
+      cursor: pointer;
+
+      transition: 0.2s;
+    }
+
+
+    .tool-button:hover {
+
+      background:
+        linear-gradient(
+          135deg,
+          rgba(112, 71, 216, 0.38),
+          rgba(82, 49, 160, 0.28)
+        );
+
+      border-color:
+        rgba(138, 98, 255, 0.5);
+
+      transform:
+        translateY(-1px);
+    }
+
+
+    .tool-button:disabled {
+
+      opacity: 0.5;
+
+      cursor:
+        not-allowed;
+
+      transform:
+        none;
+    }
+
+
+    /* =========================================
+       QR RESULT
+    ========================================= */
+
+    .qr-result {
+
+      min-height: 120px;
+
+      margin-top: 15px;
+
+      padding: 15px;
+
+      display: flex;
+
+      align-items: center;
+      justify-content: center;
+
+      border-radius: 15px;
+
+      background:
+        rgba(0,0,0,0.15);
+
+      border:
+        1px solid rgba(132,91,255,0.10);
+    }
+
+
+    .qr-result img {
+
+      max-width: 220px;
+
+      border-radius: 8px;
+    }
+
+
+    .tool-button-group {
+
+      display: flex;
+
+      gap: 9px;
+
+      margin-top: 12px;
+    }
+
+
+    .tool-small-btn {
+
+      flex: 1;
+
+      padding:
+        10px;
+
+      border:
+        1px solid rgba(132, 91, 255, 0.18);
+
+      border-radius: 10px;
+
+      background:
+        rgba(255,255,255,0.035);
+
+      color: #aaa3b5;
+
+      font-size: 11px;
+
+      cursor: pointer;
+
+      transition: 0.2s;
+    }
+
+
+    .tool-small-btn:hover {
+
+      color: #eeeaff;
+
+      background:
+        rgba(132,91,255,0.10);
+    }
+
+
+    /* =========================================
+       TIKTOK
+    ========================================= */
+
+    .tool-result {
+
+      margin-top: 15px;
+
+      padding: 15px;
+
+      border-radius: 15px;
+
+      background:
+        rgba(0,0,0,0.15);
+
+      border:
+        1px solid rgba(132,91,255,0.10);
+
+      text-align: center;
+    }
+
+
+    .tool-result h3 {
+
+      margin:
+        13px 0 4px;
+
+      color: #eeeaff;
+
+      font-family:
+        "Cinzel", serif;
+
+      font-size: 14px;
+    }
+
+
+    .tool-result p {
+
+      margin: 5px 0;
+
+      color: #777180;
+
+      font-size: 10px;
+    }
+
+
+    .tiktok-thumbnail {
+
+      display: block;
+
+      width: 100%;
+
+      max-width: 240px;
+
+      max-height: 330px;
+
+      margin: auto;
+
+      object-fit: cover;
+
+      border-radius: 13px;
+
+      box-shadow:
+        0 10px 35px rgba(0,0,0,0.35);
+    }
+
+
+    .tool-error {
+
+      margin-top: 13px;
+
+      padding: 12px;
+
+      border-radius: 11px;
+
+      background:
+        rgba(255,70,100,0.06);
+
+      border:
+        1px solid rgba(255,70,100,0.18);
+
+      color: #ff7b89;
+
+      font-size: 10px;
+
+      line-height: 1.6;
+
+      text-align: center;
+    }
+
+
+    /* =========================================
+       LOADING
+    ========================================= */
+
+    .loading-spinner {
+
+      width: 28px;
+      height: 28px;
+
+      margin: auto;
+
+      border-radius: 50%;
+
+      border:
+        3px solid
+        rgba(132,91,255,0.18);
+
+      border-top-color:
+        #8a62ff;
+
+      animation:
+        dennSpin 0.8s linear infinite;
+    }
+
+
+    @keyframes dennSpin {
+
+      to {
+
+        transform:
+          rotate(360deg);
+
+      }
+
+    }
+
+
+    /* =========================================
+       BOT RESULT
+    ========================================= */
+
+    .bot-result {
+
+      margin-top: 13px;
+
+      padding: 11px;
+
+      border-radius: 11px;
+
+      background:
+        rgba(72,211,145,0.05);
+
+      border:
+        1px solid rgba(72,211,145,0.15);
+
+      color: #48d391;
+
+      font-size: 11px;
+
+      text-align: center;
+    }
+
+
+    /* =========================================
+       BOTTOM NAV
+    ========================================= */
+
+    .bottom-nav {
+
+      z-index: 900;
+    }
+
+
+    /* =========================================
+       MOBILE
+    ========================================= */
+
+    @media (max-width: 700px) {
+
+      .tools-main {
+
+        padding-top: 70px;
+
+        padding-left: 15px;
+        padding-right: 15px;
+
+      }
+
+
+      .tools-grid {
+
+        grid-template-columns:
+          1fr;
+
+        gap: 14px;
+
+      }
+
+
+      .tools-header {
+
+        margin-top:
+          5px;
+
+        margin-bottom:
+          23px;
+
+      }
+
+
+      .tools-header h1 {
+
+        font-size: 23px;
+
+      }
+
+
+      .tools-header p {
+
+        font-size: 11px;
+
+      }
+
+
+      .tool-card {
+
+        padding: 18px;
+
+        border-radius: 17px;
+
+      }
+
+
+      .tool-header {
+
+        margin-bottom:
+          15px;
+
+      }
+
+
+      .menu-button {
+
+        top: 15px;
+        left: 15px;
+
+        width: 42px;
+        height: 42px;
+
+      }
+
+    }
+
+
+    /* =========================================
+       SMALL PHONE
+    ========================================= */
+
+    @media (max-width: 380px) {
+
+      .tools-main {
+
+        padding-left: 12px;
+        padding-right: 12px;
+
+      }
+
+
+      .tool-card {
+
+        padding: 16px;
+
+      }
+
+
+      .limit-box {
+
+        flex-direction:
+          column;
+
+        align-items:
+          flex-start;
+
+      }
+
+
+      .limit-box span {
+
+        text-align:
+          left;
+
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+  <!-- =========================================
+       BACKGROUND
+  ========================================= -->
+
+  <div class="background-glow"></div>
+
+
+  <!-- =========================================
+       MENU BUTTON
+  ========================================= -->
+
+  <button
+    id="menuButton"
+    class="menu-button"
+    type="button"
+    aria-label="Open menu"
+  >
+    ☰
+  </button>
+
+
+  <!-- =========================================
+       MENU OVERLAY
+  ========================================= -->
+
+  <div
+    id="menuOverlay"
+    class="menu-overlay"
+  ></div>
+
+
+  <!-- =========================================
+       SIDE MENU
+  ========================================= -->
+
+  <aside
+    id="sideMenu"
+    class="side-menu"
+  >
+
+    <div class="side-menu-header">
+
+      <span>
+        Denn Hosting
+      </span>
+
+      <button
+        id="closeMenu"
+        class="close-menu"
+        type="button"
+      >
+        ×
+      </button>
+
+    </div>
+
+
+    <a href="home.html">
+
+      <span>⌂</span>
+
+      Home
+
+    </a>
+
+
+    <a href="profile.html">
+
+      <span>●</span>
+
+      Profile
+
+    </a>
+
+
+    <a href="produk.html">
+
+      <span>◆</span>
+
+      Produk
+
+    </a>
+
+
+    <a href="tools.html">
+
+      <span>⚒</span>
+
+      Tools
+
+    </a>
+
+
+    <a href="docs.html">
+
+      <span>▣</span>
+
+      Docs
+
+    </a>
+
+  </aside>
+
+
+  <!-- =========================================
+       MAIN
+  ========================================= -->
+
+  <main class="container tools-main">
+
+
+    <!-- =======================================
+         HEADER
+    ======================================== -->
+
+    <header class="tools-header">
+
+      <div class="tools-header-icon">
+        ⚒
+      </div>
+
+      <h1>
+        Developer Tools
+      </h1>
+
+      <p>
+        Tools sederhana untuk kebutuhan
+        development dan WhatsApp.
+      </p>
+
+    </header>
+
+
+    <!-- =========================================
+         TOOLS GRID
+    ========================================= -->
+
+    <!-- TOOLS SEARCH & FAVORITES -->
+
+    <div class="tools-toolbar" aria-label="Pencarian tools">
+      <div class="tools-search-box">
+        <span class="tools-search-icon">🔎</span>
+        <input id="toolsSearch" class="tools-search-input" type="search" placeholder="Cari tools..." autocomplete="off">
+        <button id="clearToolsSearch" class="tools-clear-search" type="button" aria-label="Hapus pencarian">✕</button>
+      </div>
+
+      <div class="tools-filter-row">
+        <button class="tools-filter-btn active" type="button" data-tools-filter="all">Semua</button>
+        <button class="tools-filter-btn" type="button" data-tools-filter="favorite">⭐ Favorit</button>
+      </div>
+    </div>
+
+    <div id="toolsNoResult" class="tools-no-result">
+      <strong>Tools tidak ditemukan</strong>
+      Coba gunakan kata kunci lain atau pilih filter Semua.
+    </div>
+
+    <section class="tools-grid">
+
+
+      <!-- =======================================
+           QR CODE
+      ======================================== -->
+
+      <div class="tool-card qr-card">
+
+        <div class="tool-header">
+
+          <div class="tool-icon">
+            ◈
+          </div>
+
+          <div class="tool-heading">
+
+            <h2 class="tool-title">
+              QR Code Generator
+            </h2>
+
+            <p class="tool-description">
+              Buat QR Code dari URL, teks,
+              nomor WhatsApp, atau informasi lainnya.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label for="qrText">
+            Teks atau URL
+          </label>
+
+          <input
+            type="text"
+            id="qrText"
+            placeholder="Masukkan teks atau URL..."
+            autocomplete="off"
+          >
+
+        </div>
+
+
+        <button
+          type="button"
+          class="tool-button"
+          onclick="generateQR()"
+        >
+          Generate QR Code
+        </button>
+
+
+        <div
+          id="qrResult"
+          class="qr-result"
+        >
+
+          <span id="qrPlaceholder" class="qr-placeholder">
+            QR Code akan muncul di sini
+          </span>
+
+        </div>
+
+
+        <div id="qrActions" class="tool-button-group hidden-inline">
+
+          <button
+            type="button"
+            class="tool-small-btn"
+            onclick="downloadQR()"
+          >
+            Download
+          </button>
+
+
+          <button
+            type="button"
+            class="tool-small-btn"
+            onclick="copyQRText()"
+          >
+            Copy Text
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <div class="tool-card bot-card">
+
+        <div class="tool-header">
+
+          <div class="tool-icon">
+            ◇
+          </div>
+
+          <div class="tool-heading">
+
+            <h2 class="tool-title">
+              Create Base Bot
+            </h2>
+
+            <p class="tool-description">
+              Buat template dasar WhatsApp Bot
+              yang siap dikembangkan dengan konfigurasi dan file pendukung.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="bot-file-list">
+          <div class="bot-file-item">
+            <span class="bot-file-check">✓</span>
+            <span>index.js</span>
+          </div>
+
+          <div class="bot-file-item">
+            <span class="bot-file-check">✓</span>
+            <span>config.js</span>
+          </div>
+
+          <div class="bot-file-item">
+            <span class="bot-file-check">✓</span>
+            <span>commands.js</span>
+          </div>
+
+          <div class="bot-file-item">
+            <span class="bot-file-check">✓</span>
+            <span>.env.example</span>
+          </div>
+
+          <div class="bot-file-item">
+            <span class="bot-file-check">✓</span>
+            <span>README.md</span>
+          </div>
+        </div>
+
+
+        <button
+          type="button"
+          class="tool-button"
+          onclick="createBaseBot()"
+        >
+          Create Base Bot
+        </button>
+
+
+        <div id="botResult" class="bot-result hidden">
+          <span class="bot-result-text">✓ Base Bot berhasil dibuat.</span>
+        </div>
+
+      </div>
+
+
+      <!-- =======================================
+           TIKTOK DOWNLOADER
+      ======================================== -->
+
+      <div class="tool-card tiktok-card">
+
+        <div class="tool-header">
+
+          <div class="tool-icon">
+            ♪
+          </div>
+
+          <div class="tool-heading">
+
+            <h2 class="tool-title">
+              TikTok Downloader
+            </h2>
+
+            <p class="tool-description">
+              Download video TikTok menggunakan
+              link TikTok.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label for="tiktokUrl">
+            Link TikTok
+          </label>
+
+          <input
+            type="url"
+            id="tiktokUrl"
+            placeholder="https://www.tiktok.com/@user/video/..."
+            autocomplete="off"
+          >
+
+        </div>
+
+
+        <button
+          type="button"
+          class="tool-button"
+          id="tiktokButton"
+          onclick="downloadTikTok()"
+        >
+          Download TikTok
+        </button>
+
+
+        <!-- LOADING -->
+
+        <div id="tiktokLoading" class="tool-result hidden-inline">
+
+          <div class="loading-spinner"></div>
+
+          <p>
+            Mengambil data TikTok...
+          </p>
+
+        </div>
+
+
+        <!-- RESULT -->
+
+        <div id="tiktokResult" class="tool-result hidden-inline">
+
+          <img id="tiktokThumbnail" class="tiktok-thumbnail hidden-inline" src="" alt="TikTok Thumbnail" >
+
+
+          <h3 id="tiktokTitle">
+            TikTok Video
+          </h3>
+
+
+          <p id="tiktokAuthor"></p>
+
+
+          <div class="tool-button-group">
+
+            <a id="tiktokVideo" class="tool-button hidden-inline" href="#" target="_blank" rel="noopener noreferrer">
+              Download Video
+            </a>
+
+
+            <a id="tiktokAudio" class="tool-button hidden-inline" href="#" target="_blank" rel="noopener noreferrer">
+              Download Audio
+            </a>
+
+          </div>
+
+        </div>
+
+
+        <!-- ERROR -->
+
+        <div id="tiktokError" class="tool-error hidden-inline"></div>
+
+      </div>
+
+
+
+
+      <div class="tool-card instagram-card">
+        <div class="tool-header">
+          <div class="tool-icon">◎</div>
+          <div class="tool-heading">
+            <h2 class="tool-title">Instagram Downloader</h2>
+            <p class="tool-description">Download media Instagram dari link post atau reels melalui backend Qyroo.</p>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="instagramUrl">Link Instagram</label>
+          <input type="url" id="instagramUrl" placeholder="https://www.instagram.com/reel/..." autocomplete="off">
+        </div>
+        <button type="button" class="tool-button" id="instagramButton" onclick="downloadInstagram()">Download Instagram</button>
+        <div id="instagramLoading" class="tool-result hidden-inline"><div class="loading-spinner"></div><p>Mengambil data Instagram...</p></div>
+        <div id="instagramResult" class="tool-result hidden-inline">
+          <img id="instagramThumbnail" class="tiktok-thumbnail hidden-inline" src="" alt="Instagram Thumbnail">
+          <h3 id="instagramTitle">Instagram Media</h3>
+          <div id="instagramActions" class="tool-button-group"></div>
+        </div>
+        <div id="instagramError" class="tool-error hidden-inline"></div>
+      </div>
+
+
+
+    </section>
+
+
+  </main>
+
+
+  <!-- =========================================
+       BOTTOM NAVIGATION
+  ========================================= -->
+
+  <div class="bottom-nav">
+
+
+    <a
+      href="profile.html"
+      class="nav-item"
+    >
+
+      <span>
+        ●
+      </span>
+
+      <small>
+        PROFILE
+      </small>
+
+    </a>
+
+
+    <a
+      href="produk.html"
+      class="nav-item"
+    >
+
+      <span>
+        ◆
+      </span>
+
+      <small>
+        PRODUK
+      </small>
+
+    </a>
+
+
+    <a
+      href="home.html"
+      class="nav-item"
+    >
+
+      <span>
+        ⌂
+      </span>
+
+      <small>
+        HOME
+      </small>
+
+    </a>
+
+
+    <a
+      href="docs.html"
+      class="nav-item"
+    >
+
+      <span>
+        ▣
+      </span>
+
+      <small>
+        DOCS
+      </small>
+
+    </a>
+
+
+  </div>
+
+
+  <!-- =========================================
+       LIBRARIES
+  ========================================= -->
+
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"
+  ></script>
+
+
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"
+  ></script>
+
+
+  <!-- =========================================
+       MENU SCRIPT
+  ========================================= -->
+
+  <script>
+
+    const menuButton =
+      document.getElementById(
+        "menuButton"
+      );
+
+
+    const closeMenu =
+      document.getElementById(
+        "closeMenu"
+      );
+
+
+    const sideMenu =
+      document.getElementById(
+        "sideMenu"
+      );
+
+
+    const menuOverlay =
+      document.getElementById(
+        "menuOverlay"
+      );
+
+
+    function openMenu() {
+
+      sideMenu.classList.add(
+        "menu-open"
+      );
+
+      menuOverlay.classList.add(
+        "overlay-show"
+      );
+
+    }
+
+
+    function closeSideMenu() {
+
+      sideMenu.classList.remove(
+        "menu-open"
+      );
+
+      menuOverlay.classList.remove(
+        "overlay-show"
+      );
+
+    }
+
+
+    menuButton.addEventListener(
+      "click",
+      openMenu
+    );
+
+
+    closeMenu.addEventListener(
+      "click",
+      closeSideMenu
+    );
+
+
+    menuOverlay.addEventListener(
+      "click",
+      closeSideMenu
+    );
+
+
+    document
+      .querySelectorAll(
+        ".side-menu a"
+      )
+      .forEach(
+        function(link) {
+
+          link.addEventListener(
+            "click",
+            closeSideMenu
+          );
+
+        }
+      );
+
+  </script>
+
+
+  <!-- =========================================
+       TOOLS JS
+  ========================================= -->
+
+  <script src="js/app.js"></script>
+
+  <script src="js/tool-access-control.js"></script>
+
+  <script
+    src="js/tools.js"
+  ></script>
+
+  <script
+    src="js/tools-favorite-search.js"
+  ></script>
+
+
+  <script src="js/chatbot.js"></script>
+</body>
+
+</html>

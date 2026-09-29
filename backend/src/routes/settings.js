@@ -1,0 +1,5 @@
+const express=require('express');const {admin}=require('../firebase');const {requireAuth,requireAdmin}=require('../auth');const {safeText}=require('../helpers');const router=express.Router();const db=()=>admin.firestore();
+const REF=()=>db().collection('settings').doc('site');
+router.get('/site',requireAuth,async(req,res)=>{try{const s=await REF().get();res.json({ok:true,settings:s.exists?s.data():{announcement:'Selamat datang di Qyroo.',announcementEnabled:true,maintenance:false}});}catch(e){res.status(500).json({ok:false,error:'Gagal mengambil pengaturan'});}});
+router.patch('/site',requireAuth,requireAdmin,async(req,res)=>{try{const patch={updatedAt:admin.firestore.FieldValue.serverTimestamp()};if('announcement'in req.body)patch.announcement=safeText(req.body.announcement,500);if('announcementEnabled'in req.body)patch.announcementEnabled=Boolean(req.body.announcementEnabled);if('maintenance'in req.body)patch.maintenance=Boolean(req.body.maintenance);await REF().set(patch,{merge:true});res.json({ok:true,message:'Pengaturan site disimpan'});}catch(e){res.status(500).json({ok:false,error:'Gagal menyimpan pengaturan'});}});
+module.exports=router;

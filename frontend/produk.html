@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+  <title> Qyroo - Produk</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Poppins:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
+
+
+</head>
+<body>
+  <div class="background-glow"></div>
+  <div class="container">
+
+    <!-- HEADER -->
+    <div class="page-header">
+      <div class="page-header-icon">
+        ◆
+      </div>
+      <h1>
+        Produk
+      </h1>
+      <p>
+        Produk yang tersedia di Denn Hosting
+      </p>
+    </div>
+
+
+    <div class="product-filter-bar">
+      <button type="button" class="filter-chip active" data-filter="all">Semua</button>
+      <button type="button" class="filter-chip" data-filter="Hosting">Hosting</button>
+      <button type="button" class="filter-chip" data-filter="Game">Game</button>
+      <button type="button" class="filter-chip" data-filter="Layanan">Layanan</button>
+    </div>
+
+    <div class="product-search-box">
+      <input id="productSearchInput" type="text" placeholder="Cari produk..." />
+    </div>
+
+    <div class="contact-fast-actions">
+      <a href="https://wa.me/6285788309825" class="contact-fast-btn whatsapp" target="_blank" rel="noopener">WhatsApp</a>
+      <a href="mailto:dennhosting37@gmail.com" class="contact-fast-btn email" target="_blank" rel="noopener">Email</a>
+      <a href="https://t.me/DennCode" class="contact-fast-btn telegram" target="_blank" rel="noopener">Telegram</a>
+    </div>
+
+    <div id="productListContainer"></div>
+
+    <div id="paymentModalOverlay" class="payment-modal-overlay">
+      <div class="payment-modal">
+        <div class="payment-modal-header">
+          <h2>Checkout</h2>
+          <button type="button" class="close-payment-modal" id="closePaymentModal" aria-label="Tutup checkout">×</button>
+        </div>
+
+        <div class="payment-form">
+          <div class="payment-summary">
+            <strong id="checkoutProductName">Produk</strong><br>
+            <span id="checkoutProductPrice">Rp 0</span>
+          </div>
+
+          <input id="customerName" type="text" placeholder="Nama lengkap" />
+
+          <select id="paymentMethod">
+            <option value="Transfer Bank">Transfer Bank</option>
+            <option value="E-Wallet">E-Wallet</option>
+            <option value="QRIS">QRIS</option>
+            <option value="Cash/Manual">Cash / Manual</option>
+          </select>
+
+          <textarea id="orderNote" placeholder="Catatan tambahan (opsional)"></textarea>
+
+          <div class="payment-actions">
+            <button type="button" class="mini-action" id="confirmPaymentBtn">Bayar Sekarang</button>
+            <button type="button" class="secondary-btn" id="cancelPaymentBtn">Batal</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- NAVIGATION -->
+
+    <div class="bottom-nav">
+      <a
+        href="profile.html"
+        class="nav-item"
+      >
+        <span>●</span>
+        <small>PROFILE</small>
+      </a>
+      <a
+        href="produk.html"
+        class="nav-item active"
+      >
+        <span>◆</span>
+        <small>PRODUK</small>
+      </a>
+      <a
+        href="home.html"
+        class="nav-item"
+      >
+        <span>⌂</span>
+        <small>HOME</small>
+      </a>
+      <a
+        href="docs.html"
+        class="nav-item"
+      >
+        <span>▣</span>
+        <small>DOCS</small>
+      </a>
+    </div>
+  </div>
+
+
+  <!-- FIREBASE -->
+
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+
+  <script src="js/app.js"></script>
+
+
+  <!-- AUTH CHECK -->
+
+  <script>
+    const paymentModalOverlay=document.getElementById('paymentModalOverlay');
+    const checkoutProductName=document.getElementById('checkoutProductName');
+    const checkoutProductPrice=document.getElementById('checkoutProductPrice');
+    const customerName=document.getElementById('customerName');
+    const paymentMethod=document.getElementById('paymentMethod');
+    const orderNote=document.getElementById('orderNote');
+    let activeProductFilter='all',activeSort='newest',productCache=[];
+    function openPaymentModal(product){checkoutProductName.textContent=product.name;checkoutProductPrice.textContent=product.price||'Rp 0';customerName.value='';paymentModalOverlay.classList.add('show');paymentModalOverlay.dataset.productName=product.name;paymentModalOverlay.dataset.productPrice=product.price||'Rp 0'}
+    function closePaymentModal(){paymentModalOverlay.classList.remove('show')}
+    function money(v){return 'Rp '+Number(v||0).toLocaleString('id-ID')}
+    function esc(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+    async function loadProducts(){
+      const current=firebase.auth().currentUser;if(!current)return;
+      const search=(document.getElementById('productSearchInput')?.value||'').trim().toLowerCase();
+      const data=await QyrooAPI.api('/products?sort='+encodeURIComponent(activeSort)); productCache=data.products||[];
+      const role=await qyrooGetRole(current.email); const discount={Free:0,Premium:.08,VIP:.12,Pro:.18,Admin:.25}[role]??0;
+      const filtered=productCache.filter(x=>(activeProductFilter==='all'||x.category===activeProductFilter)&&(!search||String(x.name).toLowerCase().includes(search)||String(x.description).toLowerCase().includes(search)));
+      const box=document.getElementById('productListContainer');
+      box.innerHTML=filtered.length?filtered.map(x=>{const n=Number(x.price)||0;const final=n?Math.max(0,Math.round(n*(1-discount))):0;return `<div class="product-card"><button class="product-star-btn ${x.favorite?'active':''}" data-star="${esc(x.id)}" title="${x.favorite?'Hapus favorit':'Tambahkan favorit'}">${x.favorite?'★':'☆'}</button><div class="product-icon">${esc(x.icon||'◆')}</div><div class="product-content"><h2>${esc(x.name)}</h2><p>${esc(x.description||'')}</p><div class="product-price-line"><span class="product-status">${n?money(final):'Coming Soon'}</span><span class="product-discount">${role==='Free'?'Harga member dasar':`Diskon ${Math.round(discount*100)}% ${role}`}</span><span class="product-promo-badge">${esc(x.promo||'Promo')}</span></div><div class="product-actions"><button type="button" class="mini-action product-buy-btn" data-id="${esc(x.id)}">Beli Sekarang</button></div></div></div>`}).join(''):'<div class="empty-transactions">Produk tidak ditemukan.</div>';
+    }
+    document.getElementById('productSearchInput')?.addEventListener('input',loadProducts);
+    document.querySelectorAll('.filter-chip').forEach(b=>b.addEventListener('click',()=>{activeProductFilter=b.dataset.filter;document.querySelectorAll('.filter-chip').forEach(x=>x.classList.toggle('active',x===b));loadProducts()}));
+    paymentModalOverlay?.addEventListener('click',e=>{if(e.target===paymentModalOverlay)closePaymentModal()});
+    document.getElementById('closePaymentModal')?.addEventListener('click',closePaymentModal);document.getElementById('cancelPaymentBtn')?.addEventListener('click',closePaymentModal);
+    document.getElementById('productListContainer')?.addEventListener('click',async e=>{const star=e.target.closest('[data-star]');if(star){try{const d=await QyrooAPI.api('/products/'+encodeURIComponent(star.dataset.star)+'/favorite',{method:'POST'});star.classList.toggle('active',d.favorite);star.textContent=d.favorite?'★':'☆';loadProducts()}catch(err){alert(err.message)}return}const b=e.target.closest('.product-buy-btn');if(b){const p=productCache.find(x=>x.id===b.dataset.id);if(p)openPaymentModal({name:p.name,price:money(p.price)})}});
+    document.getElementById('confirmPaymentBtn')?.addEventListener('click',()=>{const message=['Halo, saya ingin melakukan pemesanan.','','Nama: '+(customerName.value.trim()||'-'),'Produk: '+(paymentModalOverlay.dataset.productName||'Produk'),'Harga: '+(paymentModalOverlay.dataset.productPrice||'Rp 0'),'Metode Pembayaran: '+paymentMethod.value,orderNote.value.trim()?'Catatan: '+orderNote.value.trim():''].filter(Boolean).join('\n');window.open('https://wa.me/6285788309825?text='+encodeURIComponent(message),'_blank');closePaymentModal()});
+    const sortBox=document.createElement('select');sortBox.className='product-sort-select';sortBox.innerHTML='<option value="newest">Terbaru</option><option value="name_asc">Nama A-Z</option><option value="price_asc">Harga termurah</option><option value="price_desc">Harga termahal</option><option value="favorite">Favorit ★</option>';document.querySelector('.product-filter-bar')?.after(sortBox);sortBox.addEventListener('change',()=>{activeSort=sortBox.value;loadProducts()});
+    firebase.auth().onAuthStateChanged(async user=>{if(!user)return location.href='login.html';try{await qyrooSyncUser();await loadProducts()}catch(e){console.error(e);document.getElementById('productListContainer').innerHTML='<div class="empty-transactions">Gagal memuat produk: '+esc(e.message)+'</div>'}});
+  </script>
+  <script src="js/chatbot.js"></script>
+</body>
+</html>
